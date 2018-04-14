@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+		<meta charset="utf-8" />
+		<title>Calculatrice</title>
+		<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+		<script type="text/javascript">
+			// Initialisation des variables pour le traitement du calcul et pour son affichage
+			var calcule = "";
+			var affichage = "";
+			
+			// Traitement des operations lorsque l'utilisateur utilise la calculatrice
+			function calculatrice(bouton){
+				
+				if(bouton == "="){
+					// L'utilisateur veut voir le résultat de son calcul
+					// On evalue le code contenu dans var calcul, ce code correspond à ce que l'utilisateur veut calculer
+					// On affiche le resultat sur l'ecran 1
+					// On affiche en entier l'operation de l'utilisateur sur l'ecran 2
+					// Puis on reinitialise var calcule, affichage pour la prochaine operation
+					calcule = eval(calcule);
+					$('#affichage1').text(calcule);
+					$('#affichage2').text(affichage);
+					calcule = "";
+					affichage = "";
+				}
+				else if(bouton == "C"){
+					// L'utilisateur veut effacer completement son operation
+					// On reinitialise var calcule, affiche
+					// Puis on affiche 0 sur les deux ecrans
+					calcule = "";
+					affichage= "";
+					$('#affichage1').text("0");
+					$('#affichage2').text("0");
+				}
+				else if(bouton == "<"){
+					// L'utilisateur efface un element de son operation
+					if(calcule.length > 1 && calcule !== 0){
+						// On retire un element de l'operation
+						calcule = calcule.substring(0,calcule.length-1);
+						$('#affichage1').text(calcule);
+					}
+					else{
+						// Le dernier element de l'operation a ete efface 
+						// On reinitialise var calcul, affichage
+						// Puis on affiche 0 sur les deux ecrans
+						calcule = "";
+						affichage = "";
+						$('#affichage1').text("0");
+						$('#affichage2').text("0");
+					}
+				}
+				else{
+					// L'utilisateur fait son operation en utilisant les touches numeriques les parentheses et les operateurs de calcul 
+					// On affiche sur l'ecran 1 son operation
+					calcule += bouton;
+					affichage = calcule;
+					$('#affichage1').text(calcule);
+				}
+			};
+		</script>
+	</head>
+		
+	<body>
+		<table>
+			<tr>
+				<td style="width:300px;overflow:hidden;border:1px solid black" id="affichage2" align="right"colspan=4>0</td>
+			</tr>
+			<tr>
+				<td style="width:300px;overflow:hidden;border:1px solid black" id="affichage1" align="right"colspan=4>0</td>
+			</tr>
+			<tr>
+			<tr align="center">
+				<td style="border:1px solid black" onclick="calculatrice();">(</td>
+				<td style="border:1px solid black" onclick="calculatrice(')');">)</td>
+				<td style="border:1px solid black" onclick="calculatrice('<');"><</td>
+				<td style="border:1px solid black" onclick="calculatrice('C');">C</td>
+			</tr>
+			<tr align="center">
+				<td style="border:1px solid black" onclick="calculatrice('7');">7</td>
+				<td style="border:1px solid black" onclick="calculatrice('8');">8</td>
+				<td style="border:1px solid black" onclick="calculatrice('9');">9</td>
+				<td style="border:1px solid black" onclick="calculatrice('/');">/</td>
+			</tr>
+			<tr align="center">
+				<td style="border:1px solid black" onclick="calculatrice('4');">4</td>
+				<td style="border:1px solid black" onclick="calculatrice('5');">5</td>
+				<td style="border:1px solid black" onclick="calculatrice('6');">6</td>
+				<td style="border:1px solid black" onclick="calculatrice('*');">*</td>
+			</tr>
+			<tr align="center">
+				<td style="border:1px solid black" onclick="calculatrice('1');">1</td>
+				<td style="border:1px solid black" onclick="calculatrice('2');">2</td>
+				<td style="border:1px solid black" onclick="calculatrice('3');">3</td>
+				<td style="border:1px solid black" onclick="calculatrice('-');">-</td>
+			</tr>
+			<tr align="center">
+				<td style="border:1px solid black" onclick="calculatrice('0');">0</td>
+				<td style="border:1px solid black" onclick="calculatrice('.');">.</td>
+				<td style="border:1px solid black" onclick="calculatrice('=');">=</td>
+				<td style="border:1px solid black" onclick="calculatrice('+');">+</td>
+			</tr>
+		</table>
+	</body>
+</html>
