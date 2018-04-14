@@ -1,2 +1,2 @@
 # calculator
-Simple calculator usine javascript
+Simple calculator using javascript
